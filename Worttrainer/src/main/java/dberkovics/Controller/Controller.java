@@ -1,13 +1,13 @@
 package dberkovics.Controller;
 
-import dberkovics.Model.WortEintrag;
-import dberkovics.Model.WortListe;
-import dberkovics.Model.WortTrainer;
+import dberkovics.Model.*;
 import dberkovics.View.Frame;
 import dberkovics.View.View;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.net.MalformedURLException;
 
 /**
@@ -21,6 +21,8 @@ public class Controller implements ActionListener {
     private WortTrainer wortTrainer;
     private WortListe wortListe;
     private WortEintrag w,w1;
+
+    private PersistenzStrategy persistenzStrategy = new JSONPersistenz();
 
     public Controller() throws MalformedURLException {
         view = new View(this);
@@ -43,5 +45,50 @@ public class Controller implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String cmd = e.getActionCommand();
+        switch(cmd){
+            case "reset":
+                this.wortTrainer = new WortTrainer(wortListe);
+                view.updateStats(0,0,true);
+                break;
+            case "add":
+                String wort =JOptionPane.showInputDialog(null,"Bitte Geben Sie ein Wort ein");
+                String url = JOptionPane.showInputDialog(null,"Bitte geben Sie eine URL ein");
+                WortEintrag w2 = new WortEintrag(wort,url);
+                int r = wortTrainer.getRichtig();
+                int a = wortTrainer.getAbgefragt();
+                wortListe.add(w2);
+                wortTrainer = new WortTrainer(wortListe);
+                wortTrainer.setAbgefragt(a);
+                wortTrainer.setRichtig(r);
+                break;
+            case "text":
+                if(wortTrainer.checkEintrag(view.getText())==true) {
+                    view.updateStats(wortTrainer.getRichtig(),wortTrainer.getAbgefragt(),true);
+                    try {
+                        view.updateImage(wortTrainer.randomEintrag().getUrl());
+                    } catch (MalformedURLException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+                else {
+                    view.updateStats(wortTrainer.getRichtig(),wortTrainer.getAbgefragt(),false);
+                }
+                break;
+            case "save":
+                try {
+                    persistenzStrategy.save(wortTrainer);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                break;
+            case "load":
+                try {
+                    wortTrainer=persistenzStrategy.load();
+                    view.updateStats(wortTrainer.getRichtig(),wortTrainer.getAbgefragt(),true);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                break;
+        }
     }
 }
