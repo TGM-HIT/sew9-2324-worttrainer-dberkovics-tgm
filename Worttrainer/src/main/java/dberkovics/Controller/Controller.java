@@ -22,7 +22,7 @@ public class Controller implements ActionListener {
     private WortListe wortListe;
     private WortEintrag w,w1;
 
-    private PersistenzStrategy persistenzStrategy = new JSONPersistenz();
+    private PersistenzStrategy persistenzStrategy = new TxtPersistenz();
 
     public Controller() throws MalformedURLException {
         view = new View(this);
@@ -48,7 +48,7 @@ public class Controller implements ActionListener {
         switch(cmd){
             case "reset":
                 this.wortTrainer = new WortTrainer(wortListe);
-                view.updateStats(0,0,true);
+                view.updateStats(0,0,true, true);
                 break;
             case "add":
                 String wort =JOptionPane.showInputDialog(null,"Bitte Geben Sie ein Wort ein");
@@ -62,8 +62,8 @@ public class Controller implements ActionListener {
                 wortTrainer.setRichtig(r);
                 break;
             case "text":
-                if(wortTrainer.checkEintrag(view.getText())==true) {
-                    view.updateStats(wortTrainer.getRichtig(),wortTrainer.getAbgefragt(),true);
+                if(wortTrainer.checkEintrag(view.getText())) {
+                    view.updateStats(wortTrainer.getRichtig(),wortTrainer.getAbgefragt(),true, false);
                     try {
                         view.updateImage(wortTrainer.randomEintrag().getUrl());
                     } catch (MalformedURLException ex) {
@@ -71,7 +71,7 @@ public class Controller implements ActionListener {
                     }
                 }
                 else {
-                    view.updateStats(wortTrainer.getRichtig(),wortTrainer.getAbgefragt(),false);
+                    view.updateStats(wortTrainer.getRichtig(),wortTrainer.getAbgefragt(),false, false);
                 }
                 break;
             case "save":
@@ -84,7 +84,8 @@ public class Controller implements ActionListener {
             case "load":
                 try {
                     wortTrainer=persistenzStrategy.load();
-                    view.updateStats(wortTrainer.getRichtig(),wortTrainer.getAbgefragt(),true);
+                    view.updateStats(wortTrainer.getRichtig(),wortTrainer.getAbgefragt(),true, true);
+                    view.updateImage(wortTrainer.getEintrag(wortTrainer.getA()).getUrl());
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }

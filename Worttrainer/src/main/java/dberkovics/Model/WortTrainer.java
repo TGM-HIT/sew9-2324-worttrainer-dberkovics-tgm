@@ -10,6 +10,7 @@ public class WortTrainer {
     private WortListe wortListe;
     private int a,laenge;
     private int abgefragt=0, richtig=0;
+    private boolean aktuell;
     /**
      * Es wird zum Worttrainer eine Liste und eine Länge hinzugefügt
      * @param wortListe Die Wortliste
@@ -51,8 +52,10 @@ public class WortTrainer {
         abgefragt+=1;
          if(wortListe.getEintrag(a).getWort().equals(wort)==true) {
              richtig+=1;
+             aktuell=true;
              return true;
          }
+         aktuell=false;
          return false;
     }
     /**
@@ -111,4 +114,13 @@ public class WortTrainer {
     public void setRichtig(int richtig) {
         this.richtig = richtig;
     }
+
+    /**
+     * Gibt den aktuellen Index der Liste zurück
+     * @return aktuelle index
+     */
+    public int getA() {
+        return a;
+    }
+
 }

@@ -22,8 +22,8 @@ public class WortListe {
     }
     /**
      * Die Methode gibt den derzeit ausgewählten Worteintrag zurück
-     * @param i
-     * @return
+     * @param i der Index des Eintrages
+     * @return den WortEintrag
      */
     public WortEintrag getEintrag(int i) {
         return liste[i];

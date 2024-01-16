@@ -11,6 +11,11 @@ import java.io.*;
  * @version 16.01.24
  */
 public class JSONPersistenz implements PersistenzStrategy{
+    /**
+     * Die Methode speichert den WortTrainer in ein Worttrainer.json File
+     * @param w der Worttrainer
+     * @throws IOException
+     */
     @Override
     public void save(WortTrainer w) throws IOException {
         try {
@@ -25,6 +30,11 @@ public class JSONPersistenz implements PersistenzStrategy{
         }
     }
 
+    /**
+     * Die Methode ladet den Worttrainer von einem Worttrainer.json File
+     * @return Der geladene Worttrainer
+     * @throws IOException
+     */
     @Override
     public WortTrainer load() throws IOException {
         try {

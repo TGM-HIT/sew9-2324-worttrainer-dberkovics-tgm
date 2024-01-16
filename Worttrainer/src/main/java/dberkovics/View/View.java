@@ -14,7 +14,7 @@ public class View extends JPanel {
     private Controller ctl;
     private JButton[] button;
     private JTextField textField;
-    private JLabel[] labels=new JLabel[7];
+    private JLabel[] labels=new JLabel[8];
     /**
      * Der Konstruktor der View Klasse
      * @param ctl Der Controller wird übernommen
@@ -64,6 +64,7 @@ public class View extends JPanel {
         button[3].setText("Worttrainer speichern");
         button[3].addActionListener(ctl);
         button[3].setActionCommand("save");
+        labels[7] = new JLabel("",SwingConstants.CENTER);
         unten.add(labels[1]);
         unten.add(labels[2]);
         unten.add(button[0]);
@@ -72,6 +73,7 @@ public class View extends JPanel {
         unten.add(button[1]);
         unten.add(button[2]);
         unten.add(button[3]);
+        unten.add(labels[7]);
         this.add(unten,BorderLayout.PAGE_END);
     }
     /**
@@ -85,13 +87,24 @@ public class View extends JPanel {
      * Die Methode updatet die Statistik
      * @param richtig Die Anzahl der richtig erratenen Wörter
      * @param anzahl Die Anzahl der Versuche
-     * @param b Es wird geprüft ob das Wort richtig eingegeben wurde oder nicht
+     * @param b Es wird geprüft, ob das Wort richtig eingegeben wurde oder nicht
+    * @param reset Ob der Worttrainer gerade resetet worden ist oder nicht
      */
-    public void updateStats(int richtig, int anzahl,boolean b) {
+    public void updateStats(int richtig, int anzahl,boolean b, boolean reset) {
         if(b) {
             labels[2].setText("" + richtig);
+            if (!reset) {
+                labels[7].setText("Richtig!");
+            }
+            else {
+                labels[7].setText("");
+            }
+
+        }else {
+            labels[7].setText("Falsch!");
         }
         labels[4].setText("" + anzahl);
+
     }
     /**
      * Die Methode fügt das derzeitige Bild hinzu

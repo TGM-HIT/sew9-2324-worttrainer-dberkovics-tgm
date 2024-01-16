@@ -14,7 +14,11 @@ import java.util.Scanner;
  * @version 16.01.24
  */
 public class TxtPersistenz implements PersistenzStrategy {
-
+    /**
+     * Die Methode speichert den WortTrainer in ein Worttrainer.txt File
+     * @param w der Worttrainer
+     * @throws IOException
+     */
     @Override
     public void save(WortTrainer w) throws IOException {
         try (PrintWriter outputStream = new PrintWriter("Worttrainer.txt")) {
@@ -25,22 +29,28 @@ public class TxtPersistenz implements PersistenzStrategy {
             }
             outputStream.println(w.getAbgefragt());
             outputStream.println(w.getRichtig());
+            outputStream.println(w.getA());
         }
         catch (IOException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
-
+    /**
+     * Die Methode ladet den WortTrainer von einem Worttrainer.txt File
+     * @throws IOException
+     * @return der geladene Worttrainer
+     */
     @Override
     public WortTrainer load() throws IOException {
         WortListe wl = new WortListe();
-        int abgefragt=-1, richtig=-1;
+        int abgefragt=-1, richtig=-1, aktuell=-1;
         try (Scanner s = new Scanner(new BufferedReader(new
                 FileReader("Worttrainer.txt")))) {
             while (s.hasNext()) {
                 if(s.hasNextInt()) {
                     abgefragt = s.nextInt();
                     richtig = s.nextInt();
+                    aktuell = s.nextInt();
                 }else {
                     String wort = s.next();
                     String url = s.next();
