@@ -20,13 +20,14 @@ public class Controller implements ActionListener {
     private Frame frame;
     private WortTrainer wortTrainer;
     private WortListe wortListe;
+    private WortEintrag w,w1;
 
     public Controller() throws MalformedURLException {
         view = new View(this);
         frame=new Frame("Worttrainer",view);
         wortListe = new WortListe();
-        WortEintrag w = new WortEintrag("Hund","https://www.pinclipart.com/picdir/middle/20-206356_wenn-hund-clipart.png");
-        WortEintrag w1 = new WortEintrag("Katze","https://media.4-paws.org/a/5/c/4/a5c4c9cdfd3a8ecb58e9b1a5bd496c9dfbc3cedc/VIER%20PFOTEN_2020-10-07_00132-2890x2000-1920x1329.jpg");
+        w = new WortEintrag("Hund","https://www.pinclipart.com/picdir/middle/20-206356_wenn-hund-clipart.png");
+        w1 = new WortEintrag("Katze","https://media.4-paws.org/a/5/c/4/a5c4c9cdfd3a8ecb58e9b1a5bd496c9dfbc3cedc/VIER%20PFOTEN_2020-10-07_00132-2890x2000-1920x1329.jpg");
         wortListe.add(w);
         wortListe.add(w1);
         wortTrainer=new WortTrainer(wortListe);
