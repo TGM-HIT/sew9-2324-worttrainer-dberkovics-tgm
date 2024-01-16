@@ -13,7 +13,7 @@ import java.net.MalformedURLException;
 /**
  * Die Controller Klasse
  * @author David Berkovics
- * @version 05.11.2021
+ * @version 16.01.2024
  */
 public class Controller implements ActionListener {
     private View view;

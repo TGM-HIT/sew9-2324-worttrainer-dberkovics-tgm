@@ -5,7 +5,7 @@ import javax.swing.*;
 /**
  * Die Frame Klasse des Worttrainers erstellt ein Frame
  * @author David Berkovics
- * @version 03.11.2021
+ * @version 16.01.2024
  */
 public class Frame extends JFrame {
     public Frame(String title, JPanel m) {

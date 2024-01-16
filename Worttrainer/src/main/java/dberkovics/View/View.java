@@ -8,7 +8,7 @@ import java.net.URL;
 /**
  * Die View Klasse des Worttrainers, hier wird das Layout erstellt
  * @author David Berkovics
- * @version 03.11.2021
+ * @version 16.01.24
  */
 public class View extends JPanel {
     private Controller ctl;

@@ -1,9 +1,11 @@
 package dberkovics.Model;
 
+import javax.swing.*;
+
 /**
  * Die Klasse erstellt einen Worteintrag und beeinhaltet auch noch Methoden für den Worteintrag
  * @author David Berkovics
- * @version 17.09.2021
+ * @version 16.01.2024
  */
 
 public class WortEintrag {
@@ -14,12 +16,12 @@ public class WortEintrag {
      * @param url Die URL wird übernommen
      */
     public WortEintrag(String wort, String url) {
-        if(wort.length()>2&&checkURL(url)) {
+        if(wort!=null&&wort.length()>2&&checkURL(url)) {
             this.wort=wort;
             this.url=url;
         }
         else {
-            System.err.println("Wort zu kurz oder URL falsch");
+            JOptionPane.showMessageDialog(null,"Wort zu kurz oder URL falsch");
         }
     }
 

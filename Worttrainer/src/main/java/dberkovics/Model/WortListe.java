@@ -3,7 +3,7 @@ package dberkovics.Model;
 /**
  * Die Wortliste
  * @author David Berkovics
- * @version 17.09.2021
+ * @version 16.01.2024
  */
 
 public class WortListe {
