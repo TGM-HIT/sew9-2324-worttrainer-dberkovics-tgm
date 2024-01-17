@@ -49,6 +49,11 @@ public class Controller implements ActionListener {
             case "reset":
                 this.wortTrainer = new WortTrainer(wortListe);
                 view.updateStats(0,0,true, true);
+                try {
+                    view.updateImage(wortTrainer.getEintrag(wortTrainer.getA()).getUrl());
+                } catch (MalformedURLException ex) {
+                    ex.printStackTrace();
+                }
                 break;
             case "add":
                 String wort =JOptionPane.showInputDialog(null,"Bitte Geben Sie ein Wort ein");
