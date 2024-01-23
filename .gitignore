@@ -40,5 +40,7 @@ bin/
 
 .idea/
 
+Worttrainer.json
+Worttrainer.txt
 ### Mac OS ###
 .DS_Store
